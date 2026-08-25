@@ -1,0 +1,6 @@
+<Project>
+  <!-- When running with .NET 10 preview SDK on some Windows environments, the copied testhost.exe apphost can trigger 0xC0000142. Removing it instructs the test runner to use dotnet exec testhost.dll directly, which is fully reliable. -->
+  <Target Name="RemoveTestHostExe" AfterTargets="Build" Condition="'$(IsTestProject)' == 'true'">
+    <Delete Files="$(TargetDir)testhost.exe" Condition="Exists('$(TargetDir)testhost.exe')" />
+  </Target>
+</Project>
